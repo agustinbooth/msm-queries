@@ -56,23 +56,52 @@
 
   <tr>
     <th>
-      ID
+      Title
     </th>
 
     <th>
-      Image
+      Year
+    </th>
+
+      <th>
+      Director
     </th>
 
     <th>
-      Name
-    </th>
-
-    <th>
-      Dob
+      Character Name
     </th>
 
     <th>
     </th>
   </tr>
 
+  <% @character.each do |a_character| %>
+
+  <tr>
+
+    <td>
+    <% movie_id = a_character.movie_id %>
+   <%= Movie.where({:id => movie_id}).at(0).title %>
+    </td>
+  
+    <td>
+    <%= Movie.where({:id => movie_id}).at(0).year %>
+    </td>
+
+    <td>
+        <% director_id = Movie.where({:id => movie_id}).at(0).director_id %>
+        <%=  Director.where({:id => director_id}).at(0).name %>
+
+     </td>
+
+    <td>
+   <%= a_character.name %>
+    </td>
+
+      <td>
+   <a href ="/movies/<%= movie_id %>"> Show details </a>
+    </td>
+
+  </tr>
+  <%end%>
 </table>
